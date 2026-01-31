@@ -4,7 +4,7 @@ use App\Dto\ServiceProviderDto;
 use App\Enums\ServiceProviderStatusEnum;
 use App\Enums\ServiceTypeEnum;
 
-it('create a service provider dto correctly', function () {
+it('create a service provider dto correctly from array', function () {
     $serviceProvider = [
         'name' => 'testApi',
         'email' => 'testapi@gmail.com',

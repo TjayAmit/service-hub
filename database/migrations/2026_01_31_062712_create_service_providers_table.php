@@ -19,11 +19,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->enum('service_type', ServiceTypeEnum::cases())->default(ServiceTypeEnum::LAUNDRY);
             $table->string('url')->unique();
             $table->string('api_key')->unique();
+            $table->enum('service_type', ServiceTypeEnum::cases())->default(ServiceTypeEnum::LAUNDRY);
             $table->enum('status', ServiceProviderStatusEnum::cases())->default(ServiceProviderStatusEnum::ACTIVE);
-            $table->softDeletes();
             $table->timestamps();
 
             $table->index('service_type');

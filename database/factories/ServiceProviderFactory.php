@@ -2,10 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Enums\ServiceProviderStatusEnum;
+use App\Enums\ServiceTypeEnum;
+use App\Models\ServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ServiceProvider>
+ * @extends Factory<ServiceProvider>
  */
 class ServiceProviderFactory extends Factory
 {
@@ -17,7 +20,12 @@ class ServiceProviderFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->name(),
+            'email' => $this->faker->unique()->safeEmail(),
+            'url' => $this->faker->url(),
+            'api_key' => $this->faker->uuid(),
+            'service_type' => $this->faker->randomElement(ServiceTypeEnum::cases())->value,
+            'status' => $this->faker->randomElement(ServiceProviderStatusEnum::cases())->value
         ];
     }
 }

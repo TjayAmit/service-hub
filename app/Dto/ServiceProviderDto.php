@@ -4,6 +4,7 @@ namespace App\Dto;
 
 use App\Enums\ServiceProviderStatusEnum;
 use App\Enums\ServiceTypeEnum;
+use App\Models\ServiceProvider;
 
 readonly class ServiceProviderDto
 {
@@ -39,6 +40,19 @@ readonly class ServiceProviderDto
             id: $data['id'] ?? null,
             url: $data['url'] ?? null,
             apiKey: $data['api_key'] ?? null,
+        );
+    }
+
+    public static function fromModel(ServiceProvider $model): self
+    {
+        return new self(
+            name: $model->name,
+            email: $model->email,
+            serviceType: $model->service_type,
+            status: $model->status,
+            id: $model->id,
+            url: $model->url,
+            apiKey: $model->api_key
         );
     }
 

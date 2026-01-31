@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use App\Enums\ServiceProviderStatusEnum;
+use App\Enums\ServiceTypeEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Database\Factories\ServiceProviderFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ServiceProvider extends Model
 {
@@ -15,17 +17,16 @@ class ServiceProvider extends Model
     protected $fillable = [
         'name',
         'email',
-        'service_type',
         'url',
         'api_key',
         'status',
+        'service_type'
     ];
 
     public $timestamps = true;
 
     protected $casts = [
-        'service_type' => ServiceProviderStatusEnum::class,
-        'status' => ServiceProviderStatusEnum::class,
-        'deleted_at' => 'datetime',
+        'service_type' => ServiceTypeEnum::class,
+        'status' => ServiceProviderStatusEnum::class
     ];
 }
