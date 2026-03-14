@@ -4,7 +4,13 @@ import DeleteUserForm from './Partials/DeleteUserForm';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm';
 
-export default function Edit({ mustVerifyEmail, status }) {
+interface EditPageProps {
+    mustVerifyEmail: boolean;
+    status: string;
+    [key: string]: any
+}
+
+export default function Edit({ mustVerifyEmail, status }: EditPageProps) {
     return (
         <AuthenticatedLayout
             header={

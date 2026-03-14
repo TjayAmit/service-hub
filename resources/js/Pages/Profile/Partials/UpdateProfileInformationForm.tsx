@@ -4,13 +4,33 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Transition } from '@headlessui/react';
 import { Link, useForm, usePage } from '@inertiajs/react';
+import type React from 'react';
+import { route } from 'ziggy-js';
+
+interface UpdateProfileProps {
+    mustVerifyEmail: boolean;
+    status?: string;
+    className?: string
+}
+
+interface UserProps {
+    auth: {
+        user: {
+            id: number
+            name: string
+            email: string
+            email_verified_at?: string | null // add if you use it
+        }
+    }
+    [key: string]: any
+}
 
 export default function UpdateProfileInformation({
     mustVerifyEmail,
     status,
     className = '',
-}) {
-    const user = usePage().props.auth.user;
+}: UpdateProfileProps) {
+    const user = usePage<UserProps>().props.auth.user;
 
     const { data, setData, patch, errors, processing, recentlySuccessful } =
         useForm({
@@ -18,7 +38,7 @@ export default function UpdateProfileInformation({
             email: user.email,
         });
 
-    const submit = (e) => {
+    const submit = (e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         patch(route('profile.update'));

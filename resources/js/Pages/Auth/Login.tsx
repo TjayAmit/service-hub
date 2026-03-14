@@ -5,15 +5,22 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
+import type React from 'react';
+import {route} from 'ziggy-js';
 
-export default function Login({ status, canResetPassword }) {
+interface LoginProps {
+    status?: string,
+    canResetPassword: boolean
+}
+
+export default function Login({ status, canResetPassword }: LoginProps) {
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
         password: '',
         remember: false,
     });
 
-    const submit = (e) => {
+    const submit = (e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         post(route('login'), {
@@ -70,7 +77,7 @@ export default function Login({ status, canResetPassword }) {
                         <Checkbox
                             name="remember"
                             checked={data.remember}
-                            onChange={(e) =>
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                                 setData('remember', e.target.checked)
                             }
                         />

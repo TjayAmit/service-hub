@@ -4,9 +4,18 @@ import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
+import {route} from 'ziggy-js';
 
-export default function AuthenticatedLayout({ header, children }) {
-    const user = usePage().props.auth.user;
+import type { PropsWithChildren, ReactNode } from 'react';
+
+interface User {
+    id: number;
+    name: string;
+    email: string;
+}
+
+export default function AuthenticatedLayout({ header, children }: PropsWithChildren<{header?: ReactNode}>) {
+    const user = usePage<{auth: {user: User}}>().props.auth.user;
 
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
